@@ -24,7 +24,7 @@ export default function Feedback() {
         const { username, password } = data
 
         // Send data to API route
-        const res = await fetch('http://localhost:3000/api/register', {
+        const res = await fetch(process.env.BASE_URL+'/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

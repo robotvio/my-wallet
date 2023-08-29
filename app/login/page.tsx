@@ -22,7 +22,7 @@ export default function Login() {
         const {username, password} = data
 
         // Send data to API route 
-        const res = await fetch('http://localhost:3000/api/login', {
+        const res = await fetch(process.env.BASE_URL+'/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export default function Login() {
 
 
         // Navigate to thank you 
-        // router.push(`/thank-you/`)
+        // router.push('/thank-you/`)
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

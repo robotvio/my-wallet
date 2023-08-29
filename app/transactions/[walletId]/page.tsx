@@ -21,9 +21,7 @@ const TransactionPage: React.FC<Props> = ({ params: { walletId } }: Props) => {
     const [items, setItems] = useState<TransactionTableObject[]>([]);
     const [loading, setLoading] = useState(true);
     const [role, setRole] = useState('user');
-    const [newItemName, setNewItemName] = useState('');
-    const [newItemAddress, setNewItemAddress] = useState('');
-    const [newSourceType, setNewSourceType] = useState('BTC');
+
 
     useEffect(() => {
         const token = getToken()!;
@@ -40,7 +38,7 @@ const TransactionPage: React.FC<Props> = ({ params: { walletId } }: Props) => {
             }
         }
         async function verify(token : string) {
-            const res = await fetch('http://localhost:3000/api/verify', {
+            const res = await fetch(process.env.BASE_URL+'/api/verify', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

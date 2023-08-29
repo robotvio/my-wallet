@@ -38,7 +38,7 @@ const TransactionPage: React.FC<Props> = ({ params: { walletId } }: Props) => {
             }
         }
         async function verify(token : string) {
-            const res = await fetch(process.env.BASE_URL+'/api/verify', {
+            const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/verify', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

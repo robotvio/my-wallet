@@ -35,7 +35,7 @@ export const getTransactionsBTC = async (address: string) :Promise<any[]> => {
     })
 }
 export const getTransactionsBTCFake = async (walletId:string,walletAddress:string) :Promise<any[]> => {
-    const res = await fetch(`${process.env.BASE_URL}/api/fake/btc/?walletAddress=${walletAddress}&walletId=${walletId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fake/btc/?walletAddress=${walletAddress}&walletId=${walletId}`, {
         method: 'GET',
     })
     return new Promise<any[]>(async (resolve, reject) => {
@@ -53,7 +53,7 @@ export const getTransactionsBTCFake = async (walletId:string,walletAddress:strin
     })
 }
 export const getTransactionsETHFake = async (walletId:string,walletAddress:string) :Promise<any[]> => {
-    const res = await fetch(`${process.env.BASE_URL}/api/fake/eth/?walletAddress=${walletAddress}&walletId=${walletId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fake/eth/?walletAddress=${walletAddress}&walletId=${walletId}`, {
         method: 'GET',
     })
     return new Promise<any[]>(async (resolve, reject) => {

@@ -11,7 +11,6 @@ import {useRouter} from "next/navigation";
 const Dashboard: React.FC = () => {
     const router = useRouter();
     const token = getToken();
-    const [userData, setUserData] = useState<any | null>(null);
 
     useEffect(() => {
         if (!token) {
@@ -26,15 +25,10 @@ const Dashboard: React.FC = () => {
                     <Navigation/>
                     <h1>Profile Page</h1>
                     <h1>Code Assignment</h1>
-
-                    {userData ? (
                         <div>
-                            <p>Name: {userData.name}</p>
-                            <p>Email: {userData.email}</p>
+                            <p>Name: SABER</p>
+                            <p>Email: SABER.KERAYECHIAN@GMAIL.COM</p>
                         </div>
-                    ) : (
-                        <p>Loading user data....</p>
-                    )}
                 </div>
 
     );

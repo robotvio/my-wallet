@@ -2,7 +2,7 @@ import { getToken} from '../utils/auth';
 
 export const addWallet = async (wallet : Wallet) :Promise<string> => {
     const token = getToken();
-    const res = await fetch(process.env.BASE_URL+'/api/wallet', {
+    const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/wallet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export const addWallet = async (wallet : Wallet) :Promise<string> => {
 export const getWallets = async (userId:string) :Promise<any[]> => {
     const token = getToken();
     console.log('going to get wallet')
-    const res = await fetch(`${process.env.BASE_URL}/api/wallet?userId=${userId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/wallet?userId=${userId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export const getWallets = async (userId:string) :Promise<any[]> => {
 
 export const deleteWallet = async (walletId: string, userId: string | null) :Promise<string> => {
     const token = getToken();
-    const res = await fetch(process.env.BASE_URL+'/api/wallet', {
+    const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/wallet', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export const deleteWallet = async (walletId: string, userId: string | null) :Pro
 }
 export const getTransactions = async (userId:string, walletId:string) :Promise<any[]> => {
     const token = getToken();
-    const res = await fetch(`${process.env.BASE_URL}/api/transactions?userId=${userId}&walletId=${walletId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/transactions?userId=${userId}&walletId=${walletId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

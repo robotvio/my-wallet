@@ -20,9 +20,13 @@ export default function Login() {
         e.preventDefault()
         console.log(JSON.stringify(data))
         const {username, password} = data
+        console.log('asdasdsadsadsa')
+        console.log(process.env.NEXT_PUBLIC_BASE_URL)
+        console.log(process.env.NEXT_PUBLIC_BASE_URL)
+        console.log(process.env.NEXT_PUBLIC_BASE_URL+'/api/login')
 
         // Send data to API route 
-        const res = await fetch(process.env.BASE_URL+'/api/login', {
+        const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

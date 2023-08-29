@@ -2,23 +2,68 @@ This is a [Next.js]  project that manager user crypto wallets
 
 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://mywallet.sabertest.online/login](http://mywallet.sabertest.online/login) with your browser to see login page
 
+Also register page is available
+
+[http://mywallet.sabertest.online/register](http://mywallet.sabertest.online/regidter)
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+**Please use google chrome**
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Self-evaluation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Test was good, just some part was not clear that is also acceptable because also this is a challenge
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Bonus tasks was good and I tried to do all of them
 
-## Deploy on Vercel
+unfortunately I did not have enough time as I was so busy these days, but I can say code can be more clean with better error handling
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+But in general was good test
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Database
+
+For database I used aws dynamo db ,there are 3 tables
+
+**Users** save the user data, username, password(hash) and role
+**Wallets** store the user's wallet
+**transactions** store all the transactions
+
+
+##API: List the endpoints
+/login   POST use for login
+/register POST use for register
+/transactions GET use for getting Transactions
+/verify POST use for authenticate user
+/wallet GET, POST, DELETE use for get wallets, add new wallet and delete wallet
+/fake/btc  /fake/eth  use for simulation fetching transactions, this endpoints generate random data
+
+
+##LOGIC
+
+All backend and front end developed by using Next js
+
+By using jwt user make registration and also can login
+in wallet page user can add wallet ,that wallet will store in aws dynamo db, also list of wallets getting from api
+also by delete method user can delete a wallet
+
+when new wallet add to database by using BullMq backend create a queue to fetch the transactions, and as soon as get the result ,transaction will store in database
+for showing the transaction one api provide the transactions list
+
+according user role in transactions list page user see the download button that will download the transactions
+
+BullMq has automatic retry, in a case request to fetch data from remote data will retry again 
+
+all apis protected by jwt and in each request token will validate
+
+there is ratelimiter in one of the api, that we can limit the rates
+
+##Tests
+
+Unfortunately I did have time to write test yet, test is important part but not challenging part, I will do it as soon as possible
+
+
+
+

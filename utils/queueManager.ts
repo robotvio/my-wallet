@@ -19,25 +19,24 @@ const ethWorker = new Worker('ethTransaction', async (job)=>{
 
 const btcWorker = new Worker('btcTransaction', async (job)=>{
     console.log('going to get transaction')
-    const result = await getTransactionsBTCFake(job.data.id,job.data.address)
-    console.log('job in worker btc',job.id)
+    const result = await getTransactionsBTCFake(job!.data!.id!,job!.data!.address!)
     insertBatchOfTransactions(result)
     return result
 }, { connection: connection});
 // const queueScheduler = new QueueScheduler('calculations');
 ethWorker.on('completed', job => {
-    console.log(`${job.id} has completed!`);
+    console.log(`${job!.id} has completed!`);
 });
 
 ethWorker.on('failed', (job, err) => {
-    console.log(`${job.id} has failed with ${err.message}`);
+    console.log(`${job!.id} has failed with ${err.message}`);
 });
 btcWorker.on('completed', job => {
-    console.log(`${job.id} btc has completed !`);
+    console.log(`${job!.id} btc has completed !`);
 });
 
 btcWorker.on('failed', (job, err) => {
-    console.log(`${job.id} btc has failed with ${err.message}`);
+    console.log(`${job!.id} btc has failed with ${err.message}`);
 });
 // const queueEvents = new QueueEvents('ethTransaction',{connection:connection});
 //

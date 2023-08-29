@@ -1,5 +1,5 @@
 
-export const getTransactionsETH = async (address) :Promise<any[]> => {
+export const getTransactionsETH = async (address : string) :Promise<any[]> => {
     const res = await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&apikey=${process.env.ETH_API_KEY}`, {
         method: 'GET',
     })
@@ -17,7 +17,7 @@ export const getTransactionsETH = async (address) :Promise<any[]> => {
     })
 }
 
-export const getTransactionsBTC = async (address) :Promise<any[]> => {
+export const getTransactionsBTC = async (address: string) :Promise<any[]> => {
     const res = await fetch(`https://blockstream.info/api/address/${address}/txs`, {
         method: 'GET',
     })

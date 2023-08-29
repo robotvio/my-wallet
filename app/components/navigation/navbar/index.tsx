@@ -36,18 +36,8 @@ const Navbar = () => {
                         </button>
                         <ul className="hidden md:flex gap-x-6 text-white ">
                             <li>
-                                <Link href="/about">
-                                    <p>About Project</p>
-                                </Link>
-                            </li>
-                            <li>
                                 <Link href="/wallets">
                                     <p>Wallet</p>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/contacts">
-                                    <p>Profile</p>
                                 </Link>
                             </li>
                         </ul>

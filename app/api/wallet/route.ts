@@ -16,13 +16,14 @@ const tableName = 'WalletTable';
 
 export async function POST(request: Request) {
     const data: Wallet = await request.json()
-    const decoded = decodeToken(request.headers.get('authorization').replace('Bearer ', ''))
+    const decoded = decodeToken(request.headers.get('authorization')!.replace('Bearer ', ''))
+
 
     const { name, address, type, id, userId } = data
     console.log('adding')
-    console.log(decoded.username)
+    console.log(decoded!.username)
     console.log(userId)
-    if (decoded.username !== userId){
+    if (decoded!.username !== userId){
         return NextResponse.json({error: 'Authentication failed'}, {status: 401})
     }
     console.log('auth ok')
@@ -30,10 +31,10 @@ export async function POST(request: Request) {
     try {
         const token = await addWalletAsync(name, address, type, id, userId!)
         if (type === 'ETH') {
-            await ethTransactionQueue.add(decoded.username + '-' + address, {address,id})
+            await ethTransactionQueue.add(decoded!.username + '-' + address, {address,id})
         }
         else {
-            await btcTransactionQueue.add(decoded.username + '-' + address, {address,id})
+            await btcTransactionQueue.add(decoded!.username + '-' + address, {address,id})
         }
 
 
@@ -48,15 +49,15 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
-    const decoded = decodeToken(request.headers.get('authorization').replace('Bearer ', ''))
+    const decoded = decodeToken(request.headers.get('authorization')!.replace('Bearer ', ''))
 
     const userId : string | null = searchParams.get('userId')
-    if (decoded.username !== userId){
+    if (decoded!.username !== userId){
         return NextResponse.json({error: 'Authentication failed'}, {status: 401})
     }
     const getWalletAsync = promisify(getWallet);
     try {
-        const result = await getWalletAsync(decoded.username)
+        const result = await getWalletAsync(decoded!.username)
         return NextResponse.json({result})
     }catch (err) {
         console.error('Error:', err);
@@ -65,12 +66,12 @@ export async function GET(request: Request) {
 }
 export async function DELETE(request: Request) {
     const data: WalletToDelete = await request.json()
-    const decoded = decodeToken(request.headers.get('authorization').replace('Bearer ', ''))
+    const decoded = decodeToken(request.headers.get('authorization')!.replace('Bearer ', ''))
 
     const { walletId, userId } = data
-    console.log(decoded.username)
+    console.log(decoded!.username)
     console.log(userId)
-    if (decoded.username !== userId){
+    if (decoded!.username !== userId){
         return NextResponse.json({error: 'Authentication failed'}, {status: 401})
     }
     console.log('auth ok')

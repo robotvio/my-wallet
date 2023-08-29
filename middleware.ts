@@ -1,25 +1,9 @@
 import { NextResponse } from "next/server"
-import {decodeToken} from "utils/auth"
+import {decodeToken} from "./utils/auth"
 
-const allowedOrigins = process.env.NODE_ENV === 'production'
-    ? ['https://www.sabertest.online', 'https://sabertest.online']
-    : ['http://localhost:3000']
 
 export function middleware(request: Request) {
 
-    const origin = request.headers.get('origin')
-
-
-
-    if (origin && !allowedOrigins.includes(origin)) {
-        return new NextResponse(null, {
-            status: 400,
-            statusText: "Bad Request",
-            headers: {
-                'Content-Type': 'text/plain'
-            }
-        })
-    }
 
     const authorizationHeader = request.headers.get('authorization');
     if (!authorizationHeader) {
@@ -28,11 +12,11 @@ export function middleware(request: Request) {
     }
     const token = authorizationHeader.replace('Bearer ', '');
     // const decodedToken = decodeToken(token)
-    // if (!decodedToken){
-    //     return  NextResponse.json({error: 'authorization header not valid'}, {status: 401})
-    // }
-    console.log(request.method)
-    console.log(request.url)
+    if (!token){
+        return  NextResponse.json({error: 'authorization header not valid'}, {status: 401})
+    }
+    // console.log(request.method)
+    // console.log(request.url)
 
 
 

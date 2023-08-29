@@ -1,6 +1,7 @@
 import {NextResponse} from "next/server";
 import * as jwt from 'jsonwebtoken';
 import { promisify } from 'util';
+import {decodeToken} from '../../../utils/auth'
 
 
 
@@ -14,9 +15,8 @@ export async function POST(request: Request) {
 
 
     const { token } = data
-    const verifyAsync = promisify(verify);
     try {
-        const res = await verifyAsync(token)
+        const res = await decodeToken(token)
         return NextResponse.json({res})
     }catch (err) {
         console.error('Error:', err);
@@ -24,15 +24,6 @@ export async function POST(request: Request) {
     }
 
 }
-// Login user
-const verify = (token: string, callback: ( err?: Error,token?: string) => void) => {
 
-
-                const decoded = jwt.verify(token, process.env.JWT_SECRET, { expiresIn: '1h', algorithm: 'HS256' });
-    callback(undefined,decoded);
-                console.log('decoded',decoded)
-
-
-};
 
 

@@ -17,7 +17,7 @@ type Props = {
     }
 }
 
-const TransactionPage: React.FC = ({ params: { walletId } }: Props) => {
+const TransactionPage: React.FC<Props> = ({ params: { walletId } }: Props) => {
     const [items, setItems] = useState<TransactionTableObject[]>([]);
     const [loading, setLoading] = useState(true);
     const [role, setRole] = useState('user');
@@ -26,12 +26,12 @@ const TransactionPage: React.FC = ({ params: { walletId } }: Props) => {
     const [newSourceType, setNewSourceType] = useState('BTC');
 
     useEffect(() => {
-        const token = getToken();
+        const token = getToken()!;
 
         async function fetchData() {
             const userId = getUserId()
             try {
-                const itemsData = await getTransactions(userId,walletId)
+                const itemsData = await getTransactions(userId!,walletId)
                 setItems(itemsData);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -39,7 +39,7 @@ const TransactionPage: React.FC = ({ params: { walletId } }: Props) => {
                 setLoading(false);
             }
         }
-        async function verify(token) {
+        async function verify(token : string) {
             const res = await fetch('http://localhost:3000/api/verify', {
                 method: 'POST',
                 headers: {
@@ -69,7 +69,7 @@ const TransactionPage: React.FC = ({ params: { walletId } }: Props) => {
 
         fetchData();
 
-    }, []);
+    }, [walletId]);
 
     const handleDownload = () => {
         const listData = JSON.stringify(items, null, 2);

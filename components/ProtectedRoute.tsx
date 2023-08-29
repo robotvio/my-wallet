@@ -1,10 +1,13 @@
 // components/ProtectedRoute.tsx
 
 import { useRouter } from "next/navigation"
-import { useEffect } from 'react';
+import React,{ useEffect } from 'react';
 import { getToken } from '../utils/auth';
+type BoxProps = {
+    children: React.ReactNode; // 👈️ type children
+};
 
-const ProtectedRoute: React.FC = ({ children }) => {
+const ProtectedRoute: React.FC = (props: any) => {
     const router = useRouter();
     const token = getToken();
 
@@ -20,7 +23,7 @@ const ProtectedRoute: React.FC = ({ children }) => {
         return <div>Loading...</div>;
     }
 
-    return <>{children}</>;
+    return <>{props.children}</>;
 };
 
 export default ProtectedRoute;

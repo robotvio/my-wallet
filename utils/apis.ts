@@ -25,7 +25,7 @@ export const addWallet = async (wallet : Wallet) :Promise<string> => {
 }
 
 
-export const getWallets = async (userId) :Promise<any[]> => {
+export const getWallets = async (userId:string) :Promise<any[]> => {
     const token = getToken();
     console.log('going to get wallet')
     const res = await fetch(`http://localhost:3000/api/wallet?userId=${userId}`, {
@@ -72,7 +72,7 @@ export const deleteWallet = async (walletId: string, userId: string | null) :Pro
         }
     })
 }
-export const getTransactions = async (userId, walletId) :Promise<any[]> => {
+export const getTransactions = async (userId:string, walletId:string) :Promise<any[]> => {
     const token = getToken();
     const res = await fetch(`http://localhost:3000/api/transactions?userId=${userId}&walletId=${walletId}`, {
         method: 'GET',

@@ -47,9 +47,12 @@ const loginUser = (username: string, password: string, callback: ( err?: Error,t
             callback(err, undefined);
         } else {
             const storedPassword = data?.Item?.password?.S;
+            const role = data?.Item?.role?.S
+            const secret  = process.env.JWT_SECRET === undefined?"NO SECRET":process.env.JWT_SECRET
+
             if (storedPassword === hashedPassword) {
                 // Password matches, generate JWT token
-                const token = jwt.sign({ username, userId:username ,role:data.Item.role.S}, process.env.JWT_SECRET, { expiresIn: '24h', algorithm: 'HS256' });
+                const token = jwt.sign({ username, userId:username ,role}, secret, { expiresIn: '24h', algorithm: 'HS256' });
                 console.log('User logged in successfully');
                 callback(undefined,token);
             } else {

@@ -1,3 +1,4 @@
+
 type Wallet = {
     name: string,
     address: string,
@@ -7,7 +8,7 @@ type Wallet = {
 };
 
 type WalletToDelete = {
-    id:string,
+    walletId:string,
     userId:string|null
 };
 interface ListItem {

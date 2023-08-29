@@ -9,13 +9,15 @@ const tableName = 'TransactionTable';
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
-    const decoded = decodeToken(request.headers.get('authorization').replace('Bearer ', ''))
+    const decoded = decodeToken(request!.headers!.get('authorization')!.replace('Bearer ', ''))
     console.log(searchParams)
+
 
     const userId : string | null = searchParams.get('userId')
     const walletId : string  = searchParams.get('walletId')!
 
-    if (decoded.username !== userId){
+
+    if (decoded!.username !== userId){
         return NextResponse.json({error: 'Authentication failed'}, {status: 401})
     }
     // await ethTransactionQueue.add(decoded.username+'-'+walletId, {walletId})

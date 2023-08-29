@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import List from '../components/List';
+import List from '../components/list';
 import {getUserId} from "../../utils/auth"
 import { v4 as uuidv4 } from 'uuid';
 import {useRouter} from "next/navigation"
@@ -24,7 +24,7 @@ const WalletPage: React.FC = () => {
         async function fetchData() {
             const userId = getUserId()
             try {
-                const itemsData = await getWallets(userId)
+                const itemsData = await getWallets(userId!)
                 setItems(itemsData);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -55,7 +55,7 @@ const WalletPage: React.FC = () => {
             setNewItemAddress('');
             setShowPopup(false);
 
-            const updatedItems = await getWallets(userId);
+            const updatedItems = await getWallets(userId!);
             setItems(updatedItems);
         } catch (error) {
             console.error('Error adding item:', error);
